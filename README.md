@@ -9,3 +9,13 @@ Read their code or their `readme-mt.txt` for more details. Or check out their
 a small wrapper around their code to make it mimic the behavior the `R` library.
 
 If you want something more than that, don't use this! Either roll your own or, better, use the `R` standalone math library.
+
+The `mt19937ar.*` files are copyright their original owners subject to their
+terms. See those files for details.
+
+To compile and run an example, try:
+
+    gcc mt19937ar.c replaceR.c testreplaceR.c -o testreplaceR
+    ./testreplaceR
+
+The results here should agree with the results in `ReplaceResults.txt`.
