@@ -47,3 +47,37 @@ double runif(double lower, double upper) {
   double x = genrand_real2();
   return (lower + x * (upper - lower)) ;  
 }
+
+
+unsigned long hash(char *str, unsigned long hash) {
+  // djb2 hash
+  // http://www.cse.yorku.ca/~oz/hash.html
+  // they init by 5381, here we make able to keep feeding on itself
+        int c;
+
+        while (c = *str++)
+	  hash = ((hash << 5) + hash) ^ c; /* hash * 33 + c */
+
+        return hash;
+    }
+
+void hash_init_rand(int argc, char **argv) {
+  // hash the arguments, use as seed
+  int i = 0;
+  unsigned long hsh = 5381;
+  for(i=0;i<argc;i++) {
+    hsh = hash(argv[i], hsh);
+  }
+  init_genrand(hsh);
+}
+
+void set_hash_seed(int argc, char **argv, unsigned int x, unsigned int y) {
+  // take the hash and add in two more seeds to init by array
+  int i = 0;
+  unsigned long hsh = 5381;
+  for(i=0;i<argc;i++) {
+    hsh = hash(argv[i], hsh);
+  }
+  unsigned long init_key[3] = {hsh, (unsigned long) x, (unsigned long) y};
+  init_by_array(init_key, 3);
+}
