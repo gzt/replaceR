@@ -37,3 +37,9 @@
 void set_seed(unsigned int x, unsigned int y);
 
 double runif(double lower, double upper);
+
+unsigned long hash(char *str, unsigned long hash);
+
+void hash_init_rand(int argc, char **argv);
+
+void set_hash_seed(int argc, char **argv, unsigned int x, unsigned int y);
