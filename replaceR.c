@@ -35,7 +35,6 @@
 
  */
 #include <stdio.h>
-#include "mt19937ar.h"
 #include "replaceR.h"
 
 void set_seed(unsigned int x, unsigned int y) {
@@ -46,6 +45,31 @@ void set_seed(unsigned int x, unsigned int y) {
 double runif(double lower, double upper) {
   double x = genrand_real2();
   return (lower + x * (upper - lower)) ;  
+}
+
+uint32_t randint(unsigned int range){
+  // code for this function via M O'Neill, Apache License 2.0
+  // algorithm from Lemire, https://arxiv.org/abs/1805.10941
+  // adjusted by M O'Neill for speed,
+  // http://www.pcg-random.org/posts/bounded-rands.html
+  // chooses a random integer in [0, range)
+    unsigned long x = genrand_int32();
+    uint64_t m = (uint64_t) (x) * (uint64_t) (range);
+    uint32_t l = (uint32_t) (m);
+    if (l < range) {
+        uint32_t t = -range;
+        if (t >= range) {
+            t -= range;
+            if (t >= range) 
+                t %= range;
+        }
+        while (l < t) {
+            x = genrand_int32();
+            m = (uint64_t) (x) * (uint64_t) (range);
+            l = (uint32_t) (m);
+        }
+    }
+    return m >> 32;
 }
 
 

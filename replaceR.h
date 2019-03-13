@@ -33,6 +33,10 @@
    gzthompson@gmail.com
 
  */
+#ifndef REPLACE_R
+#define REPLACE_R
+#include <stdint.h>
+#include "mt19937ar.h"
 
 void set_seed(unsigned int x, unsigned int y);
 
@@ -43,3 +47,6 @@ unsigned long hash(char *str, unsigned long hash);
 void hash_init_rand(int argc, char **argv);
 
 void set_hash_seed(int argc, char **argv, unsigned int x, unsigned int y);
+
+uint32_t randint(unsigned int range);
+#endif
