@@ -27,6 +27,7 @@ gcc mt19937ar.c replaceR.c testreplaceR.c -o testreplaceR
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "mt19937ar.h"
 #include "replaceR.h"
 
@@ -49,6 +50,12 @@ int main(void){
       printf("%10.8f ", runif(0.,1.));
       if (i%5==4) printf("\n");
     }
-    
-    return 0;
+
+    set_seed(0x123, 0x234);
+    printf("\n1000 outputs of randint(100)\n");
+    for (i=0; i<1000; i++) {
+      printf("%u\t", randint(100));
+      if (i%10==9) printf("\n");
+    }
+    return EXIT_SUCCESS;
 }
