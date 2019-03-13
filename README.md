@@ -32,3 +32,19 @@ To compile and run an example, try:
     ./testreplaceR
 
 The results here should agree with the results in `ReplaceResults.txt`.
+
+Here is a histogram of 1000 random integers generated from the interval [0,100):
+
+![](res.png)
+
+And results of a Kolmogorov-Smirnov test of the data in `R`:
+
+```
+	Two-sample Kolmogorov-Smirnov test
+
+data:  res and rep(0:99, 10)
+D = 0.011, p-value = 1
+alternative hypothesis: two-sided
+```
+
+Your results should agree.
